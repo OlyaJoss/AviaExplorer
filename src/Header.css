@@ -1,0 +1,40 @@
+.header-container {
+    font-family: 'Nunito', sans-serif;
+    color: #7B61FF;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 40px;
+    max-width: 1246px;
+    padding-top: 52px;
+    padding-left: 92px;
+    padding-right: 90px;
+    padding-bottom: 148px;
+}
+
+.top-wrapper {
+display: grid;
+grid-template-columns: 2fr 1fr 1fr;
+}
+
+.header-button {
+    font-family: 'Nunito', sans-serif;
+    color: #7B61FF;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 40px;
+    padding: 12px 45px;
+    border: none;
+    background-color: #F5F5F5;
+}
+
+.header-button__select {
+    padding: 12px 58px 12px 24px;
+}
+
+.promo-text {
+font-style: normal;
+font-weight: 800;
+font-size: 60px;
+line-height: 70px;
+text-align: center;
+}
