@@ -12,14 +12,14 @@ import {
 function Nav() {
     return (
       <>
-        <Flex minWidth='max-content' px={90} pb={148} alignItems='center'>
-          
+        <Flex as='header' w='full' px={90} pb={148} alignItems='center'>
+          <Box>
           <Text >AviaExplorer</Text>
-        
+          </Box>
           <Spacer />
           
-          <Button type='button' border='none' bgColor='transparent'>Profile</Button>
-          <Select type='button' w='110px' border='none' bgColor='transparent' placeholder='English'></Select>
+          <Button as='a' type='button' border='none' bgColor='transparent'>Profile</Button>
+          <Select w='110px' border='none' bgColor='transparent' placeholder='English'></Select>
           
           </Flex>
 
