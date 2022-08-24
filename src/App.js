@@ -1,6 +1,7 @@
 
 import Nav from './Nav';
 import Form from './Form';
+import FlightInfo from './FlightInfo';
 import * as React from 'react';
 import { 
   Container,
@@ -14,6 +15,7 @@ function App() {
         <VStack w='full' h='full' m={0} color='#7B61FF' py={51}>
         <Nav />
         <Form />
+        <FlightInfo />
         </VStack>
     </Container>
       

@@ -17,17 +17,24 @@ function Form() {
     const [startDate, setStartDate] = useState(new Date());
     return (
         <>
-            <Flex alignItems='flex-end' justify='space-between' flexDirection='row' pb={80} w='986px'>
+            <Flex alignItems='flex-end' justify='space-between' flexDirection='row' pb='80px' w='986px'>
                 <FormControl w='282px'>
                     <FormLabel color='#474A51'>
                         From
                     </FormLabel>
-                    <Input placeholder='Airport, City or Country' w='282px' h='64px' bgColor='#FFFFFF' />
+                    <Input
+                        placeholder='Airport, City or Country'
+                        _placeholder={{ fontWeight: 500 }}
+                        w='282px' h='64px'
+                        bgColor='#FFFFFF'
+                        color='#1F2229'
+                        fontWeight='700'
+                        borderColor='#D8D8D8' />
                 </FormControl>
 
                 <IconButton aria-label='Replace cities'
                     size='xs'
-                    mb={2}
+                    mb={5}
                     variant='outline'
                     bgColor='#FFFFFF'
                     isRound icon={<RepeatIcon color='#7B61FF' />} />
@@ -36,14 +43,21 @@ function Form() {
                     <FormLabel color='#474A51'>
                         To
                     </FormLabel>
-                    <Input placeholder='Airport, City or Country' h='64px' w='282px' bgColor='#FFFFFF' />
+                    <Input
+                        placeholder='Airport, City or Country'
+                        _placeholder={{ fontWeight: 500 }}
+                        h='64px' w='282px'
+                        bgColor='#FFFFFF'
+                        color='#1F2229'
+                        fontWeight='700'
+                        borderColor='#D8D8D8' />
                 </FormControl>
 
                 {/* <Input placeholder='Sat 23.12' w='191px' bgColor='#FFFFFF'/> */}
                 <Box>
                     <DatePicker className='date-picker' selected={startDate} onChange={(date: Date) => setStartDate(date)} />
                 </Box>
-                <Button type='button' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF'>Search</Button>
+                <Button type='button' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>
 
             </Flex>
         </>
