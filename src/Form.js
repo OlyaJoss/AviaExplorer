@@ -37,7 +37,8 @@ function Form() {
                     mb={5}
                     variant='outline'
                     bgColor='#FFFFFF'
-                    isRound icon={<RepeatIcon color='#7B61FF' />} />
+                    isRound 
+                    icon={<RepeatIcon color='#7B61FF' />} />
 
                 <FormControl w='282px'>
                     <FormLabel color='#474A51'>
@@ -55,7 +56,7 @@ function Form() {
 
                 {/* <Input placeholder='Sat 23.12' w='191px' bgColor='#FFFFFF'/> */}
                 <Box>
-                    <DatePicker className='date-picker' selected={startDate} onChange={(date: Date) => setStartDate(date)} />
+                    <DatePicker className='date-picker' dateFormat='dd/MM/yyyy' selected={startDate} onChange={(date) => setStartDate(date)} />
                 </Box>
                 <Button type='button' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>
 
