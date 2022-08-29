@@ -28,7 +28,7 @@ function Nav() {
           fontFamily='Nunito'
           color='#7B61FF'
           as='h1'
-          size='4xl'
+          fontSize='60px'
           lineHeight='70px'
           pb='5px'
           textAlign='center'

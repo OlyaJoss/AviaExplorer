@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import Form from './Form';
 
 import {
     Grid,
@@ -11,21 +12,24 @@ import {
     Flex,
     VisuallyHidden
 } from '@chakra-ui/react'
+
 function FlightInfo() {
     return (
         <>
             {/* Main grid container */}
             <Grid templateRows='repeat(2, 1fr)'
-                templateColumns='100px 996px'
-                w='full'
-                pl={8} 
+                templateColumns='1fr 80px 996px 1fr'
+                w='full' 
             >
+                <GridItem colStart={3} colEnd={-2}>
+                <Form />
+                </GridItem>
                 {/* Header */}
-                <GridItem colStart={2} colEnd={-1}>
+                <GridItem colStart={3} colEnd={-2}
+                rowStart={2} rowEnd={3}>
                     <Grid
                         templateColumns='333px 295px 180px 188px'
                         color='#474A51'
-                        justifyContent='center'
                         alignItems='center'
                         minHeight='74px'
                     >
@@ -42,12 +46,13 @@ function FlightInfo() {
                 </GridItem>
 
                 {/* Side */}
-                <GridItem rowStart={2} rowEnd={3} >
+                <GridItem rowStart={3} rowEnd={4} 
+                colStart={2} colEnd={-3}>
                     <Text color='#474A51' pt={6} pr={0}>Non-stop</Text>
                 </GridItem>
 
                 {/* Flight info */}
-                <GridItem colStart={2} colEnd={-1}
+                <GridItem colStart={3} colEnd={-2}
                     bgColor='#FFFFFF'
                     color='#474A51'
                     borderRadius='8px'
@@ -86,12 +91,13 @@ function FlightInfo() {
                 </GridItem>
 
                 {/* Empty grid item */}
-                <GridItem colStart={2} colEnd={-1} minHeight='72px'>
+                <GridItem colStart={2} colEnd={-1} minHeight='72px'
+                rowStart={4} rowEnd={5}>
                 </GridItem>
                 
 
                 {/* 1 stop flight info */}
-                <GridItem colStart={2} colEnd={-1}
+                <GridItem colStart={3} colEnd={-2}
                     bgColor='#FFFFFF'
                     color='#474A51'
                     borderRadius='8px'
@@ -127,9 +133,10 @@ function FlightInfo() {
                         </GridItem>
                     </Grid>
                 </GridItem>
-                
+
                 {/* Side */}
-                <GridItem rowStart={4} rowEnd={5} >
+                <GridItem rowStart={5} rowEnd={6} 
+                colStart={2} colEnd={-3}>
                     <Text color='#474A51' pt={6} pr={0}>1 stop</Text>
                 </GridItem>
             </Grid>
