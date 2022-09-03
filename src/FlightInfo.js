@@ -17,16 +17,16 @@ function FlightInfo() {
     return (
         <>
             {/* Main grid container */}
-            <Grid templateRows='repeat(2, 1fr)'
+            <Grid templateRows='repeat(1, 1fr)'
                 templateColumns='1fr 80px 996px 1fr'
-                w='full' 
+                w='full'
             >
                 <GridItem colStart={3} colEnd={-2}>
-                <Form />
+                    <Form />
                 </GridItem>
                 {/* Header */}
                 <GridItem colStart={3} colEnd={-2}
-                rowStart={2} rowEnd={3}>
+                    rowStart={2} rowEnd={3}>
                     <Grid
                         templateColumns='333px 295px 180px 188px'
                         color='#474A51'
@@ -46,8 +46,8 @@ function FlightInfo() {
                 </GridItem>
 
                 {/* Side */}
-                <GridItem rowStart={3} rowEnd={4} 
-                colStart={2} colEnd={-3}>
+                <GridItem rowStart={3} rowEnd={4}
+                    colStart={2} colEnd={-3}>
                     <Text color='#474A51' pt={6} pr={0}>Non-stop</Text>
                 </GridItem>
 
@@ -58,7 +58,7 @@ function FlightInfo() {
                     borderRadius='8px'
                     h='74px'
                     mb='8px'>
-                    <Grid 
+                    <Grid
                         templateColumns='333px 295px 180px 188px'
                         color='#474A51'
                         fontWeight='600'
@@ -92,9 +92,9 @@ function FlightInfo() {
 
                 {/* Empty grid item */}
                 <GridItem colStart={2} colEnd={-1} minHeight='72px'
-                rowStart={4} rowEnd={5}>
+                    rowStart={4} rowEnd={5}>
                 </GridItem>
-                
+
 
                 {/* 1 stop flight info */}
                 <GridItem colStart={3} colEnd={-2}
@@ -102,7 +102,7 @@ function FlightInfo() {
                     color='#474A51'
                     borderRadius='8px'
                     h='74px'>
-                    <Grid 
+                    <Grid
                         templateColumns='333px 295px 180px 188px'
                         color='#474A51'
                         fontWeight='600'
@@ -116,7 +116,7 @@ function FlightInfo() {
                         <GridItem alignItems='baseline'>
                             <Flex w='212px' alignItems='baseline'>
                                 <Text pr='16px'>08:15; 15:35; 17:20</Text>
-                               <Button type='button' w='24px'>+3</Button>
+                                <Button type='button' w='24px'>+3</Button>
                             </Flex>
                         </GridItem>
                         <GridItem>
@@ -135,8 +135,8 @@ function FlightInfo() {
                 </GridItem>
 
                 {/* Side */}
-                <GridItem rowStart={5} rowEnd={6} 
-                colStart={2} colEnd={-3}>
+                <GridItem rowStart={5} rowEnd={6}
+                    colStart={2} colEnd={-3}>
                     <Text color='#474A51' pt={6} pr={0}>1 stop</Text>
                 </GridItem>
             </Grid>

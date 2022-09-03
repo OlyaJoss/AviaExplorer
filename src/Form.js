@@ -15,14 +15,38 @@ import { RepeatIcon } from '@chakra-ui/icons';
 
 function Form() {
     const [startDate, setStartDate] = useState(new Date());
+    const [fromAirport, setFromAirport] = useState('');
+    const [toAirport, setToAirport] = useState('');
+    const AERO_DATA = 'https://aerodatabox.p.rapidapi.com/airports/icao/';
+    // {EHAM/stats/routes/daily/}
+
+    const searchSubmitHandler = (e) => {
+        e.preventDefault();
+            console.log(fromAirport, startDate, toAirport)
+            const options = {
+                method: 'GET',
+                headers: {
+                    'X-RapidAPI-Key': 'a8154b1356mshac98bb79d3b0cacp13166fjsn0586619865ba',
+                    'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
+                }
+            };
+            
+            fetch(`${AERO_DATA}${fromAirport}/stats/routes/daily/`, options)
+                .then(response => response.json())
+                .then(response => console.log(response))
+                .catch(err => console.error(err));
+    }
     return (
         <>
-            <Flex alignItems='flex-end' justify='space-between' flexDirection='row' pb='80px' w='986px'>
+            <Flex as='form' onSubmit={searchSubmitHandler}
+                alignItems='flex-end' justify='space-between' flexDirection='row' pb='80px' w='986px'>
                 <FormControl w='282px'>
                     <FormLabel color='#474A51'>
                         From
                     </FormLabel>
                     <Input
+                        value={fromAirport}
+                        onChange={(event) => setFromAirport(event.target.value)}
                         placeholder='Airport, City or Country'
                         _placeholder={{ fontWeight: 500 }}
                         w='282px' h='64px'
@@ -37,7 +61,7 @@ function Form() {
                     mb={5}
                     variant='outline'
                     bgColor='#FFFFFF'
-                    isRound 
+                    isRound
                     icon={<RepeatIcon color='#7B61FF' />} />
 
                 <FormControl w='282px'>
@@ -45,6 +69,8 @@ function Form() {
                         To
                     </FormLabel>
                     <Input
+                        value={toAirport}
+                        onChange={(event) => setToAirport(event.target.value)}
                         placeholder='Airport, City or Country'
                         _placeholder={{ fontWeight: 500 }}
                         h='64px' w='282px'
@@ -54,13 +80,13 @@ function Form() {
                         borderColor='#D8D8D8' />
                 </FormControl>
 
-                {/* <Input placeholder='Sat 23.12' w='191px' bgColor='#FFFFFF'/> */}
                 <Box>
                     <DatePicker className='date-picker' dateFormat='dd/MM/yyyy' selected={startDate} onChange={(date) => setStartDate(date)} />
                 </Box>
-                <Button type='button' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>
+                <Button type='submit' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>
 
             </Flex>
+            
         </>
     )
 }
