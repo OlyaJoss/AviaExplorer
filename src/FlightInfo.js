@@ -22,15 +22,17 @@ import { RepeatIcon } from '@chakra-ui/icons';
 
 function FlightInfo() {
 
+
     const [startDate, setStartDate] = useState(new Date());
     const [fromAirport, setFromAirport] = useState('');
     const [toAirport, setToAirport] = useState('');
+    const [fromInfo, setFromInfo] = useState(null);
     const AERO_DATA = 'https://aerodatabox.p.rapidapi.com/airports/icao/';
     // {EHAM/stats/routes/daily/}
     // Handler with fetch for Form
     const searchSubmitHandler = (e) => {
         e.preventDefault();
-        console.log(fromAirport, startDate, toAirport)
+        // console.log(fromAirport, startDate, toAirport,fromInfo)
         const options = {
             method: 'GET',
             headers: {
@@ -41,8 +43,28 @@ function FlightInfo() {
 
         fetch(`${AERO_DATA}${fromAirport}/stats/routes/daily/`, options)
             .then(response => response.json())
-            .then(response => console.log(response))
+            .then(response => {
+                setFromInfo(response.routes)
+                console.log(fromAirport, startDate, toAirport, fromInfo)
+            }
+            )
             .catch(err => console.error(err));
+    }
+
+    const FlightRes = () => {
+        if (!fromInfo) {
+            return (<Text>Loading...</Text>)
+        }
+        if (fromInfo.lenght === 0) {
+            return (<Text>No flights found</Text>)
+        }
+        return (
+            fromInfo.map((el) => (
+                <NonStopFlight
+                    name={el.destination.name}
+                    operators={el.operators} />
+            ))
+        )
     }
 
     return (
@@ -54,7 +76,7 @@ function FlightInfo() {
             >
                 {/* Grid with Form */}
                 <GridItem colStart={3} colEnd={-2}>
-                {/* Form */}
+                    {/* Form */}
                     <Flex as='form' onSubmit={searchSubmitHandler}
                         alignItems='flex-end' justify='space-between' flexDirection='row' pb='80px' w='986px'>
                         <FormControl w='282px'>
@@ -106,6 +128,8 @@ function FlightInfo() {
 
                 </GridItem>
 
+
+
                 {/* Header */}
                 <GridItem colStart={3} colEnd={-2}
                     rowStart={2} rowEnd={3}>
@@ -141,7 +165,7 @@ function FlightInfo() {
                     borderRadius='8px'
                     h='74px'
                     mb='8px'>
-                    <NonStopFlight />
+                    <FlightRes />
                 </GridItem>
 
                 {/* Empty grid item */}
