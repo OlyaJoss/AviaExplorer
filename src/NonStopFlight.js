@@ -12,7 +12,8 @@ import {
 } from '@chakra-ui/react'
 
 
-function NonStopFlight() {
+function NonStopFlight(props) {
+    const {operators} = props;
     return (
         <Grid
             templateColumns='333px 295px 180px 188px'
@@ -23,7 +24,7 @@ function NonStopFlight() {
             minHeight='74px'
         >
             <GridItem>
-                <Text>El-Al Israel Airlines</Text>
+                <Text> {operators.map((el)=> `${el.name}, `)} </Text>
             </GridItem>
             <GridItem alignItems='baseline'>
                 <Flex w='212px' alignItems='baseline'>
