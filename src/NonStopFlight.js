@@ -13,8 +13,14 @@ import {
 
 
 function NonStopFlight(props) {
-    const {operators} = props;
+    const {name} = props;
     return (
+        <GridItem colStart={3} colEnd={-2}
+                    bgColor='#FFFFFF'
+                    color='#474A51'
+                    borderRadius='8px'
+                    h='74px'
+                    mb='8px'>
         <Grid
             templateColumns='333px 295px 180px 188px'
             color='#474A51'
@@ -24,7 +30,7 @@ function NonStopFlight(props) {
             minHeight='74px'
         >
             <GridItem>
-                <Text> {operators.map((el)=> `${el.name}, `)} </Text>
+                <Text> {name} </Text>
             </GridItem>
             <GridItem alignItems='baseline'>
                 <Flex w='212px' alignItems='baseline'>
@@ -45,6 +51,7 @@ function NonStopFlight(props) {
                 </ButtonGroup>
             </GridItem>
         </Grid>
+        </GridItem>
     );
 }
 export default NonStopFlight;

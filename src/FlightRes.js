@@ -45,22 +45,15 @@ const FlightRes = ({fromInfo}) => {
                 </GridItem>
 
                 {/* Flight info */}
-                <GridItem colStart={3} colEnd={-2}
-                    rowStart={3} rowEnd={4}
-                    bgColor='#FFFFFF'
-                    color='#474A51'
-                    borderRadius='8px'
-                    h='74px'
-                    mb='8px'>
                     
-                    {fromInfo[0].operators.map((el) => (<NonStopFlight operators={el.name} key={el.destination.icao} /> ))}
+                    {fromInfo[0].operators.map((el) => (<NonStopFlight name={el.name} key={el.name} /> ))}
                    
-                </GridItem>
+                
 
                 {/* Empty grid item */}
-                <GridItem colStart={2} colEnd={-1} minHeight='72px'
+                {/* <GridItem colStart={2} colEnd={-1} minHeight='72px'
                     rowStart={4} rowEnd={5}>
-                </GridItem>
+                </GridItem> */}
 
 
                 {/* 1 stop flight info
