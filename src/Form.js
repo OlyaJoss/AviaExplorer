@@ -16,13 +16,13 @@ import { RepeatIcon } from '@chakra-ui/icons';
 function Form(props) {
 
     const [startDate, setStartDate] = useState(new Date());
-    const [fromAirport, setFromAirport] = useState('EGLL');
-    const [toAirport, setToAirport] = useState('KJFK');  
- 
+    const [fromAirport, setFromAirport] = useState('MOW');
+    const [toAirport, setToAirport] = useState('TAS');  
+
 
     return (
         <>
-            <Flex as='form' onSubmit={(e)=> props.onSearch(e, fromAirport, toAirport, startDate)}
+            <Flex as='form' onSubmit={(e)=> props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0])}
                 alignItems='flex-end' justify='space-between' flexDirection='row' pb='80px' w='986px'>
                 <FormControl w='282px'>
                     <FormLabel color='#474A51'>
@@ -65,7 +65,10 @@ function Form(props) {
                 </FormControl>
 
                 <Box>
-                    <DatePicker className='date-picker' dateFormat='dd/MM/yyyy' selected={startDate} onChange={(date) => setStartDate(date)} />
+                    <DatePicker className='date-picker' dateFormat='dd/MM/yyyy' selected={startDate} onChange={(date) => {
+                        setStartDate(date)
+                        console.log(date)
+                        }} />
                 </Box>
                 <Button type='submit' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>
 

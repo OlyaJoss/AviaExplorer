@@ -17,32 +17,21 @@ function FlightInfo() {
  const [fromInfo, setFromInfo] = useState(null);
  
  
-    const AERO_DATA = 'https://aerodatabox.p.rapidapi.com/airports/icao/';
-    // {EHAM/stats/routes/daily/}
-  
+    const API_URL = 'http://localhost:8080/';
+    const API_LIMIT = 30;
+    const API_UNIQUE = true;
+    const API_CURR = 'usd';
+   
       // Handler with fetch for Form
-      const searchSubmitHandler = (e, fromAirport, toAirport) => {
+      const searchSubmitHandler = (e, fromAirport, toAirport, startDate) => {
         e.preventDefault();
-        // console.log(`Hello ${fromAirport}`)
-        // console.log(fromAirport, startDate, toAirport,fromInfo)
-        const options = {
-            method: 'GET',
-            headers: {
-                'X-RapidAPI-Key': 'a8154b1356mshac98bb79d3b0cacp13166fjsn0586619865ba',
-                'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com'
-            }
-        };
 
-        fetch(`${AERO_DATA}${fromAirport}/stats/routes/daily/`, options)
+        fetch(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
             .then(response => response.json())
             .then(response => {
-                // setFromInfo(response.routes)
-                setFromInfo(response.routes.filter((el)=> el.destination.icao === toAirport))
-            
-            
-            console.log(fromInfo)
-            }
-            )
+            console.log(response)
+            console.log(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
+            })
             .catch(err => console.error(err));
     }
     
