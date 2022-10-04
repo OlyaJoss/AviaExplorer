@@ -2,8 +2,6 @@ import * as React from 'react';
 import { useState } from 'react';
 import Form from './Form';
 import FlightRes from './FlightRes';
-// import OneStopFlight from './OneStopFlight';
-// import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './DatePicker.css';
 import {
@@ -14,7 +12,7 @@ import {
 
 function FlightInfo() {
 
- const [fromInfo, setFromInfo] = useState(null);
+ const [serverResponse, setServerResponse] = useState(null);
  
  
     const API_URL = 'http://localhost:8080/';
@@ -29,8 +27,9 @@ function FlightInfo() {
         fetch(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
             .then(response => response.json())
             .then(response => {
-            console.log(response)
-            console.log(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
+                setServerResponse(response)
+          console.log(response)
+            // console.log(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
             })
             .catch(err => console.error(err));
     }
@@ -50,7 +49,7 @@ function FlightInfo() {
                     <Form onSearch={searchSubmitHandler}/>
 
                 </GridItem>
-                <FlightRes fromInfo={fromInfo}/>
+                <FlightRes serverResponse={serverResponse}/>
 
 
                

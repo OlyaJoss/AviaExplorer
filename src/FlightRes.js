@@ -6,16 +6,14 @@ import {
     Text
 } from '@chakra-ui/react';
 
-const FlightRes = ({fromInfo}) => {
-    if (!fromInfo) {
+const FlightRes = ({serverResponse}) => {
+    if (!serverResponse) {
         return (<Text>Loading...</Text>);
     }
-    if (fromInfo.lenght === 0) {
+    if (serverResponse.lenght === 0) {
         return (<Text>No flights found</Text>);
     }
     return (
-        // fromInfo.map((el) => (<NonStopFlight name={el.destination.name} operators={el.operators} />))
-
         <>
  {/* Header */}
  <GridItem colStart={3} colEnd={-2}
@@ -46,7 +44,7 @@ const FlightRes = ({fromInfo}) => {
 
                 {/* Flight info */}
                     
-                    {fromInfo[0].operators.map((el) => (<NonStopFlight name={el.name} key={el.name} /> ))}
+                    {serverResponse.data.map((el) => (<NonStopFlight name={el.airline} key={el.flight_number} /> ))}
                    
                 
 
