@@ -17,7 +17,7 @@ function FlightInfo() {
  
     const API_URL = 'http://localhost:8080/';
     const API_LIMIT = 30;
-    const API_UNIQUE = true;
+    const API_UNIQUE = false;
     const API_CURR = 'usd';
    
       // Handler with fetch for Form
@@ -29,6 +29,7 @@ function FlightInfo() {
             .then(response => {
                 setServerResponse(response)
           console.log(response)
+
             // console.log(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
             })
             .catch(err => console.error(err));

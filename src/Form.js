@@ -22,7 +22,7 @@ function Form(props) {
 
     return (
         <>
-            <Flex as='form' onSubmit={(e)=> props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0])}
+            <Flex as='form' onSubmit={(e)=> props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0].slice(0, 7))}
                 alignItems='flex-end' justify='space-between' flexDirection='row' pb='80px' w='986px'>
                 <FormControl w='282px'>
                     <FormLabel color='#474A51'>
@@ -65,7 +65,13 @@ function Form(props) {
                 </FormControl>
 
                 <Box>
-                    <DatePicker className='date-picker' dateFormat='dd/MM/yyyy' selected={startDate} onChange={(date) => {
+                    <DatePicker 
+                    className='date-picker' 
+                    dateFormat='MM/yyyy' 
+                    showMonthYearPicker 
+                    showFullMonthYearPicker 
+                    selected={startDate} 
+                    onChange={(date) => {
                         setStartDate(date)
                         console.log(date)
                         }} />

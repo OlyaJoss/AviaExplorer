@@ -13,7 +13,7 @@ import {
 
 
 function NonStopFlight(props) {
-    const {name} = props;
+    const {name, price} = props;
     return (
         <GridItem colStart={3} colEnd={-2}
                     bgColor='#FFFFFF'
@@ -39,7 +39,7 @@ function NonStopFlight(props) {
                 </Flex>
             </GridItem>
             <GridItem>
-                <Text>> $550</Text>
+             <Text>>{price}</Text>
             </GridItem>
             <GridItem>
                 <ButtonGroup>
