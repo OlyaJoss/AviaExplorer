@@ -44,9 +44,15 @@ const FlightRes = ({ serverResponse }) => {
 
             {/* Flight info */}
 
-            {serverResponse.data.map((el) => (<NonStopFlight name={el.airline} key={el.link} price={el.price}/>))}
-
-
+            {serverResponse.data.map((el) => (<NonStopFlight
+                name={el.airline}
+                key={el.link}
+                price={el.price}
+                time={new Date(el.departure_at).toUTCString().slice(0, 22)}
+                link={el.link}
+                 />))}
+{/* time={el.departure_at.slice(0, 16)}
+                    2022-03-10 15:30 */}
 
             {/* Empty grid item */}
             {/* <GridItem colStart={2} colEnd={-1} minHeight='72px'
