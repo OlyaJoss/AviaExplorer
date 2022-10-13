@@ -16,9 +16,8 @@ import {
 
 function NonStopFlight(props) {
     const { name, price, time, link } = props;
-// const airlineNames = airlineCode.filter()
+    const airlineName = airlineCode.filter((el)=> el.code === name)[0].name_translations.en
     return (
-
         <GridItem colStart={3} colEnd={-2}
             bgColor='#FFFFFF'
             color='#474A51'
@@ -44,7 +43,7 @@ function NonStopFlight(props) {
                 </GridItem>
 
                 <GridItem>
-                    <Text ml='16px'> {name} </Text>
+                    <Text ml='16px'> {airlineName} </Text>
                 </GridItem>
 
                 <GridItem alignItems='baseline'>
