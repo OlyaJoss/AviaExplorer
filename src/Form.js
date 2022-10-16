@@ -12,6 +12,12 @@ import {
     Box
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
+// import {
+//     AutoComplete,
+//     AutoCompleteInput,
+//     AutoCompleteItem,
+//     AutoCompleteList,
+//   } from "@choc-ui/chakra-autocomplete";
 
 function Form(props) {
 
@@ -38,6 +44,22 @@ function Form(props) {
                         color='#1F2229'
                         fontWeight='700'
                         borderColor='#D8D8D8' />
+
+{/* <AutoComplete openOnFocus>
+          <AutoCompleteInput variant="filled" />
+          <AutoCompleteList>
+            {countries.map((country, cid) => (
+              <AutoCompleteItem
+                key={`option-${cid}`}
+                value={country}
+                textTransform="capitalize"
+              >
+                {country}
+              </AutoCompleteItem>
+            ))}
+          </AutoCompleteList>
+        </AutoComplete> */}
+
                 </FormControl>
 
                 <IconButton aria-label='Replace cities'
