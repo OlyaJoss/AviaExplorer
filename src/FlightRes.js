@@ -51,31 +51,6 @@ const FlightRes = ({ serverResponse }) => {
                 time={new Date(el.departure_at).toUTCString().slice(0, 22)}
                 link={el.link}
                  />))}
-{/* time={el.departure_at.slice(0, 16)}
-                    2022-03-10 15:30 */}
-
-            {/* Empty grid item */}
-            {/* <GridItem colStart={2} colEnd={-1} minHeight='72px'
-                    rowStart={4} rowEnd={5}>
-                </GridItem> */}
-
-
-            {/* 1 stop flight info
-                <GridItem colStart={3} colEnd={-2}
-                    bgColor='#FFFFFF'
-                    color='#474A51'
-                    borderRadius='8px'
-                    h='74px'>
-                    {/* <OneStopFlight />
-                    </GridItem>  */}
-
-
-            {/* Side
-                <GridItem rowStart={5} rowEnd={6}
-                    colStart={2} colEnd={-3}>
-                    <Text color='#474A51' pt={6} pr={0}>1 stop</Text>
-                </GridItem> */}
-
         </>);
 }
 

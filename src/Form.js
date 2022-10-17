@@ -12,20 +12,28 @@ import {
     Box
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
-// import {
-//     AutoComplete,
-//     AutoCompleteInput,
-//     AutoCompleteItem,
-//     AutoCompleteList,
-//   } from "@choc-ui/chakra-autocomplete";
+import {
+    AutoComplete,
+    AutoCompleteInput,
+    AutoCompleteItem,
+    AutoCompleteList,
+  } from "@choc-ui/chakra-autocomplete";
 
 function Form(props) {
 
     const [startDate, setStartDate] = useState(new Date());
     const [fromAirport, setFromAirport] = useState('MOW');
     const [toAirport, setToAirport] = useState('TAS');
+    const [autoHints, setAutoHints] = useState([]);
+    const getData = () => {
+        // json => js
+        fetch(`http://autocomplete.travelpayouts.com/places2?term=${fromAirport}&locale=en&types[]=city,airport,country`)
+            .then(result => result.json())
+            .then(data => setAutoHints(data))
+            .catch(err => console.error(err));
+    }
 
-
+        console.log(autoHints)
     return (
         <>
             <Flex as='form' onSubmit={(e) => props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0].slice(0, 7))}
@@ -34,31 +42,35 @@ function Form(props) {
                     <FormLabel color='#474A51'>
                         From
                     </FormLabel>
+                    
                     <Input
                         value={fromAirport}
-                        onChange={(event) => setFromAirport(event.target.value)}
+                        onChange={(event) => {
+                            setFromAirport(event.target.value)
+                            getData()
+                        }}
                         placeholder='Airport, City or Country'
                         _placeholder={{ fontWeight: 500 }}
                         w='282px' h='64px'
                         bgColor='#FFFFFF'
                         color='#1F2229'
                         fontWeight='700'
-                        borderColor='#D8D8D8' />
+                        borderColor='#D8D8D8' /> 
 
-{/* <AutoComplete openOnFocus>
+                    <AutoComplete openOnFocus>
           <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
-            {countries.map((country, cid) => (
+            {autoHints.map((name, id) => (
               <AutoCompleteItem
-                key={`option-${cid}`}
-                value={country}
+                key={`option-${id}`}
+                value={fromAirport}
                 textTransform="capitalize"
               >
-                {country}
+                {name}
               </AutoCompleteItem>
             ))}
           </AutoCompleteList>
-        </AutoComplete> */}
+        </AutoComplete>
 
                 </FormControl>
 

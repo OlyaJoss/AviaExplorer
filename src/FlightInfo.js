@@ -29,8 +29,6 @@ function FlightInfo() {
             .then(response => {
                 setServerResponse(response)
                 console.log(response)
-
-                // console.log(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
             })
             .catch(err => console.error(err));
     }
