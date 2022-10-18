@@ -12,12 +12,6 @@ import {
     Box
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
-import {
-    AutoComplete,
-    AutoCompleteInput,
-    AutoCompleteItem,
-    AutoCompleteList,
-  } from "@choc-ui/chakra-autocomplete";
 
 function Form(props) {
 
@@ -33,7 +27,7 @@ function Form(props) {
             .catch(err => console.error(err));
     }
 
-        console.log(autoHints)
+    console.log(autoHints)
     return (
         <>
             <Flex as='form' onSubmit={(e) => props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0].slice(0, 7))}
@@ -42,7 +36,7 @@ function Form(props) {
                     <FormLabel color='#474A51'>
                         From
                     </FormLabel>
-                    
+
                     <Input
                         value={fromAirport}
                         onChange={(event) => {
@@ -55,23 +49,12 @@ function Form(props) {
                         bgColor='#FFFFFF'
                         color='#1F2229'
                         fontWeight='700'
-                        borderColor='#D8D8D8' /> 
-
-                    <AutoComplete openOnFocus>
-          <AutoCompleteInput variant="filled" />
-          <AutoCompleteList>
-            {autoHints.map((name, id) => (
-              <AutoCompleteItem
-                key={`option-${id}`}
-                value={fromAirport}
-                textTransform="capitalize"
-              >
-                {name}
-              </AutoCompleteItem>
-            ))}
-          </AutoCompleteList>
-        </AutoComplete>
-
+                        borderColor='#D8D8D8' />
+                    {autoHints.map(({ name, code, country_name, id }) => (
+                        <Button key={id} colorScheme='teal' size='xs' mr='3px' onClick={() => setFromAirport(name)}>
+                            {name} {country_name} {code}
+                        </Button>)
+                    )}
                 </FormControl>
 
                 <IconButton aria-label='Replace cities'
