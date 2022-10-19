@@ -30,8 +30,9 @@ function Form(props) {
     console.log(autoHints)
     return (
         <>
+        
             <Flex as='form' onSubmit={(e) => props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0].slice(0, 7))}
-                alignItems='flex-end' justify='space-between' flexDirection='row' pb='80px' w='986px'>
+                alignItems='flex-end' justify='space-between' flexDirection='row' pb='10px' w='986px'>
                 <FormControl w='282px'>
                     <FormLabel color='#474A51'>
                         From
@@ -50,11 +51,7 @@ function Form(props) {
                         color='#1F2229'
                         fontWeight='700'
                         borderColor='#D8D8D8' />
-                    {autoHints.map(({ name, code, country_name, id }) => (
-                        <Button key={id} colorScheme='teal' size='xs' mr='3px' onClick={() => setFromAirport(name)}>
-                            {name} {country_name} {code}
-                        </Button>)
-                    )}
+                   
                 </FormControl>
 
                 <IconButton aria-label='Replace cities'
@@ -96,7 +93,14 @@ function Form(props) {
                 <Button type='submit' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>
 
             </Flex>
-
+            {/* TODO: лимит  на подсказки, показывать первые 5 */}
+            <Box pb='80px' w='350px'>
+            {autoHints.map(({ name, code, country_name, id }) => (
+                        <Button key={id} color='#FFFFFF' bgColor='#7B61FF' size='xs' mr='3px' onClick={() => setFromAirport(name)}>
+                            {name} {country_name} {code}
+                        </Button>)
+                    )}
+            </Box>
         </>
     )
 }
