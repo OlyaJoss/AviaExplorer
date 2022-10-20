@@ -9,16 +9,20 @@ import {
     Input,
     IconButton,
     Button,
-    Box
+    Box,
+    Text
 } from '@chakra-ui/react';
 import { RepeatIcon } from '@chakra-ui/icons';
 
 function Form(props) {
 
     const [startDate, setStartDate] = useState(new Date());
-    const [fromAirport, setFromAirport] = useState('MOW');
+    const [fromAirport, setFromAirport] = useState('');
     const [toAirport, setToAirport] = useState('TAS');
     const [autoHints, setAutoHints] = useState([]);
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [isFromAirportValid, setIsFromAirportValid] = useState(false);
+
     const getData = () => {
         // json => js
         fetch(`http://autocomplete.travelpayouts.com/places2?term=${fromAirport}&locale=en&types[]=city,airport,country`)
@@ -26,23 +30,29 @@ function Form(props) {
             .then(data => setAutoHints(data))
             .catch(err => console.error(err));
     }
-
-    console.log(autoHints)
+    
     return (
         <>
         
-            <Flex as='form' onSubmit={(e) => props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0].slice(0, 7))}
+            <Flex as='form'
+            onSubmit={(e) => {
+                isFormValid 
+                ? props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0].slice(0, 7))
+                : e.preventDefault()
+            }}
                 alignItems='flex-end' justify='space-between' flexDirection='row' pb='10px' w='986px'>
                 <FormControl w='282px'>
                     <FormLabel color='#474A51'>
                         From
                     </FormLabel>
-
+                
                     <Input
                         value={fromAirport}
                         onChange={(event) => {
                             setFromAirport(event.target.value)
                             getData()
+                            setIsFormValid(false)
+                            setIsFromAirportValid(false)
                         }}
                         placeholder='Airport, City or Country'
                         _placeholder={{ fontWeight: 500 }}
@@ -51,6 +61,7 @@ function Form(props) {
                         color='#1F2229'
                         fontWeight='700'
                         borderColor='#D8D8D8' />
+                      
                    
                 </FormControl>
 
@@ -95,8 +106,18 @@ function Form(props) {
             </Flex>
             {/* TODO: лимит  на подсказки, показывать первые 5 */}
             <Box pb='80px' w='350px'>
-            {autoHints.map(({ name, code, country_name, id }) => (
-                        <Button key={id} color='#FFFFFF' bgColor='#7B61FF' size='xs' mr='3px' onClick={() => setFromAirport(name)}>
+            {
+                           isFromAirportValid 
+                           ? null
+                           : <Text>Choose variant from below</Text>
+                       } 
+            {autoHints.slice(0, 5).map(({ name, code, country_name, id }) => (
+                        <Button key={id} color='#FFFFFF' bgColor='#7B61FF' size='xs' mr='3px' 
+                        onClick={() => {
+                        setFromAirport(name)
+                        setIsFormValid(true)
+                        setIsFromAirportValid(true)
+                        }}>
                             {name} {country_name} {code}
                         </Button>)
                     )}
