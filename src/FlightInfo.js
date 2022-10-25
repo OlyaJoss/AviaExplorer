@@ -48,7 +48,7 @@ function FlightInfo() {
                     <Form onSearch={searchSubmitHandler} />
 
                 </GridItem>
-                <FlightRes serverResponse={serverResponse} />
+                <FlightRes serverResponse={serverResponse}/>
 
 
 

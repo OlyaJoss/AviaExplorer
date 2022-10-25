@@ -19,15 +19,18 @@ function Form(props) {
     const [startDate, setStartDate] = useState(new Date());
     const [fromAirport, setFromAirport] = useState('');
     const [toAirport, setToAirport] = useState('TAS');
-    const [autoHints, setAutoHints] = useState([]);
+    const [fromIataCode, setFromIataCode] = useState('');
+    const [toIataCode, setToIataCode] = useState('');
+    const [autoHintsFrom, setAutoHintsFrom] = useState([]);
+    const [autoHintsTo, setAutoHintsTo] = useState([]);
     const [isFormValid, setIsFormValid] = useState(false);
     const [isFromAirportValid, setIsFromAirportValid] = useState(false);
     const [isToAirportValid, setIsToAirportValid] = useState(false);
 
-    const getData = (text) => {
+    const getData = (text, where = 'from') => {
         fetch(`http://autocomplete.travelpayouts.com/places2?term=${text}&locale=en&types[]=city,airport,country`)
             .then(result => result.json())
-            .then(data => setAutoHints(data))
+            .then(data => where === 'from' ? setAutoHintsFrom(data) : setAutoHintsTo(data))
             .catch(err => console.error(err));
     }
 
@@ -37,7 +40,7 @@ function Form(props) {
             <Flex as='form'
                 onSubmit={(e) => {
                     isFormValid
-                        ? props.onSearch(e, fromAirport, toAirport, startDate.toISOString().split('T')[0].slice(0, 7))
+                        ? props.onSearch(e, fromIataCode, toIataCode, startDate.toISOString().split('T')[0].slice(0, 7))
                         : e.preventDefault()
                 }}
                 alignItems='flex-end' justify='space-between' flexDirection='row' pb='10px' w='986px'>
@@ -82,7 +85,7 @@ function Form(props) {
                         value={toAirport}
                         onChange={(event) => {
                             setToAirport(event.target.value)
-                            getData(toAirport)
+                            getData(toAirport, 'to')
                             setIsToAirportValid(false)
                         }}
                         placeholder='Airport, City or Country'
@@ -110,16 +113,18 @@ function Form(props) {
 
             </Flex>
             {/* TODO: лимит  на подсказки, показывать первые 5 */}
-            <Box pb='80px' w='350px'>
+            <Flex>
+            <Box pb='80px' mr='55px' w='282px'>
                 {
                     isFromAirportValid
                         ? null
                         : <Text>Choose variant from below</Text>
                 }
-                {autoHints.slice(0, 5).map(({ name, code, country_name, id }) => (
+                {autoHintsFrom.slice(0, 5).map(({ name, code, country_name, id }) => (
                     <Button key={id} color='#FFFFFF' bgColor='#7B61FF' size='xs' mr='3px'
                         onClick={() => {
-                            setFromAirport(name)
+                            setFromIataCode(code)
+                            setFromAirport(`${name} ${country_name} ${code}`)
                             setIsFormValid(true)
                             setIsFromAirportValid(true)
                         }}>
@@ -128,16 +133,17 @@ function Form(props) {
                 )}
             </Box>
 
-            <Box pb='80px' w='350px'>
+            <Box pb='80px' w='282px'>
                 {
                     isToAirportValid
                         ? null
                         : <Text>Choose variant from below</Text>
                 }
-                {autoHints.slice(0, 5).map(({ name, code, country_name, id }) => (
+                {autoHintsTo.slice(0, 5).map(({ name, code, country_name, id }) => (
                     <Button key={id} color='#FFFFFF' bgColor='#7B61FF' size='xs' mr='3px'
                         onClick={() => {
-                            setToAirport(name)
+                            setToIataCode(code)
+                            setToAirport(`${name} ${country_name} ${code}`)
                             setIsFormValid(true)
                             setIsToAirportValid(true)
                         }}>
@@ -145,6 +151,7 @@ function Form(props) {
                     </Button>)
                 )}
             </Box>
+            </Flex>
         </>
     )
 }

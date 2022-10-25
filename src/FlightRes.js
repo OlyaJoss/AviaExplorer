@@ -50,7 +50,7 @@ const FlightRes = ({ serverResponse }) => {
                 price={el.price}
                 time={new Date(el.departure_at).toUTCString().slice(0, 22)}
                 link={el.link}
-                 />))}
+            />))}
         </>);
 }
 
