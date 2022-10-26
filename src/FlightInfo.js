@@ -13,7 +13,7 @@ import {
 function FlightInfo() {
 
     const [serverResponse, setServerResponse] = useState(null);
-
+    const [isFetchSend, setIsFetchSend] = useState(false);
 
     const API_URL = 'http://localhost:8080/';
     const API_LIMIT = 30;
@@ -23,12 +23,12 @@ function FlightInfo() {
     // Handler with fetch for Form
     const searchSubmitHandler = (e, fromAirport, toAirport, startDate) => {
         e.preventDefault();
-
+        setIsFetchSend(true)
         fetch(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
             .then(response => response.json())
             .then(response => {
                 setServerResponse(response)
-                console.log(response)
+                setIsFetchSend(false)
             })
             .catch(err => console.error(err));
     }
@@ -45,7 +45,7 @@ function FlightInfo() {
                 {/* Grid with Form */}
                 <GridItem colStart={3} colEnd={-2}>
                     {/* Form */}
-                    <Form onSearch={searchSubmitHandler} />
+                    <Form onSearch={searchSubmitHandler} isFetchSend={isFetchSend}/>
 
                 </GridItem>
                 <FlightRes serverResponse={serverResponse}/>

@@ -3,12 +3,34 @@ import NonStopFlight from './NonStopFlight';
 import {
     Grid,
     GridItem,
-    Text
+    Text,
+    Spinner
 } from '@chakra-ui/react';
 
-const FlightRes = ({ serverResponse }) => {
+const FlightRes = ({ serverResponse, isFetchSend }) => {
     if (!serverResponse) {
-        return (<Text>Loading...</Text>);
+        return (<GridItem colStart={3} colEnd={-2}
+            rowStart={2} rowEnd={3}>
+            {isFetchSend
+                ? <Grid
+                    templateColumns='1fr'
+                    color='#474A51'
+                    alignItems='center'
+                    minHeight='74px'
+                >
+                    <GridItem>
+                        <Spinner
+                            thickness='4px'
+                            speed='0.65s'
+                            emptyColor='gray.200'
+                            color='#7B61FF'
+                            size='xl'
+                        />
+                    </GridItem>
+                </Grid>
+                : null
+            }
+        </GridItem>);
     }
     if (serverResponse.lenght === 0) {
         return (<Text>No flights found</Text>);

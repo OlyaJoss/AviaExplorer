@@ -18,7 +18,7 @@ function Form(props) {
 
     const [startDate, setStartDate] = useState(new Date());
     const [fromAirport, setFromAirport] = useState('');
-    const [toAirport, setToAirport] = useState('TAS');
+    const [toAirport, setToAirport] = useState('');
     const [fromIataCode, setFromIataCode] = useState('');
     const [toIataCode, setToIataCode] = useState('');
     const [autoHintsFrom, setAutoHintsFrom] = useState([]);
@@ -37,7 +37,7 @@ function Form(props) {
     return (
         <>
 
-            <Flex as='form'
+            <Flex as='form' autoComplete='off'
                 onSubmit={(e) => {
                     isFormValid
                         ? props.onSearch(e, fromIataCode, toIataCode, startDate.toISOString().split('T')[0].slice(0, 7))
@@ -48,7 +48,7 @@ function Form(props) {
                     <FormLabel color='#474A51'>
                         From
                     </FormLabel>
-                    {/* ПРАВЫЙ ИНПУТ */}
+                    {/* FROM ИНПУТ */}
                     <Input
                         value={fromAirport}
                         onChange={(event) => {
@@ -80,7 +80,7 @@ function Form(props) {
                     <FormLabel color='#474A51'>
                         To
                     </FormLabel>
-                    {/* ЛЕВЫЙ ИНПУТ */}
+                    {/* TO ИНПУТ */}
                     <Input
                         value={toAirport}
                         onChange={(event) => {
@@ -115,8 +115,9 @@ function Form(props) {
             {/* TODO: лимит  на подсказки, показывать первые 5 */}
             <Flex>
             <Box pb='80px' mr='55px' w='282px'>
-                {
-                    isFromAirportValid
+                {   fromAirport === '' 
+                ?  <Text>Fill in this field</Text>
+                : isFromAirportValid
                         ? null
                         : <Text>Choose variant from below</Text>
                 }
@@ -134,8 +135,9 @@ function Form(props) {
             </Box>
 
             <Box pb='80px' w='282px'>
-                {
-                    isToAirportValid
+                { toAirport === ''
+                ? <Text>Fill in this field</Text>
+                :    isToAirportValid
                         ? null
                         : <Text>Choose variant from below</Text>
                 }
