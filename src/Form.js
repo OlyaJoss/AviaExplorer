@@ -28,7 +28,7 @@ function Form(props) {
     const [isToAirportValid, setIsToAirportValid] = useState(false);
 
     const getData = (text, where = 'from') => {
-        fetch(`http://autocomplete.travelpayouts.com/places2?term=${text}&locale=en&types[]=city,airport,country`)
+        fetch(`https://autocomplete.travelpayouts.com/places2?term=${text}&locale=en&types[]=city,airport,country`)
             .then(result => result.json())
             .then(data => where === 'from' ? setAutoHintsFrom(data) : setAutoHintsTo(data))
             .catch(err => console.error(err));
@@ -106,7 +106,6 @@ function Form(props) {
                         selected={startDate}
                         onChange={(date) => {
                             setStartDate(date)
-                            console.log(date)
                         }} />
                 </Box>
                 <Button type='submit' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>

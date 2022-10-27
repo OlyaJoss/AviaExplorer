@@ -15,7 +15,7 @@ function FlightInfo() {
     const [serverResponse, setServerResponse] = useState(null);
     const [isFetchSend, setIsFetchSend] = useState(false);
 
-    const API_URL = 'http://localhost:8080/';
+    const API_URL = 'https://aviaexplorerserver.vercel.app';
     const API_LIMIT = 30;
     const API_UNIQUE = false;
     const API_CURR = 'usd';
@@ -24,7 +24,7 @@ function FlightInfo() {
     const searchSubmitHandler = (e, fromAirport, toAirport, startDate) => {
         e.preventDefault();
         setIsFetchSend(true)
-        fetch(`${API_URL}${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
+        fetch(`${API_URL}/${API_CURR}/${fromAirport}/${toAirport}/${startDate}/${API_UNIQUE}/${API_LIMIT}`)
             .then(response => response.json())
             .then(response => {
                 setServerResponse(response)
