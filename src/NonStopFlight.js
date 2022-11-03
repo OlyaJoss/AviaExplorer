@@ -15,8 +15,9 @@ import {
 
 
 function NonStopFlight(props) {
-    const { name, price, time, link } = props;
-    const airlineName = airlineCode.filter((el) => el.code === name)[0].name_translations.en
+    const { name = 'Unknown', price, time, link } = props;
+    console.log(name)
+    const airlineName = airlineCode.filter((el) => el.code === name)[0]?.name_translations.en
     return (
         <GridItem colStart={3} colEnd={-2}
             bgColor='#FFFFFF'
@@ -34,16 +35,24 @@ function NonStopFlight(props) {
             >
                 <GridItem p={0}
                     ml='16px'>
-
-                    <img src={`https://pics.avs.io/80/42/${name}.png`}
-                        srcSet={`https://pics.avs.io/122/56/${name}@2x.png 2x`}
-                        width='80'
-                        height='42'
-                        alt='Airline logo' />
+                   
+                    { name === ''
+                    ? <Text> No picture available </Text>
+                    :  <img src={`https://pics.avs.io/80/42/${name}.png`}
+                    srcSet={`https://pics.avs.io/122/56/${name}@2x.png 2x`}
+                    width='80'
+                    height='42'
+                    alt='Airline logo' />
+                    }
+                   
                 </GridItem>
 
                 <GridItem>
-                    <Text ml='16px'> {airlineName} </Text>
+                    { name === ''
+                    ? <Text> Unknown airline </Text>
+                    : <Text ml='16px'> {airlineName} </Text>
+                    }
+                   
                 </GridItem>
 
                 <GridItem alignItems='baseline'>
