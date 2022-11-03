@@ -33,23 +33,22 @@ function NonStopFlight(props) {
                 alignItems='center'
                 minHeight='74px'
             >
+                {/* FIXME refactor duplicate tern */}
                 <GridItem p={0}
                     ml='16px'>
                    
                     { name === ''
-                    ? <Text> No picture available </Text>
+                    ? <Text> No picture </Text> 
                     :  <img src={`https://pics.avs.io/80/42/${name}.png`}
                     srcSet={`https://pics.avs.io/122/56/${name}@2x.png 2x`}
                     width='80'
                     height='42'
                     alt='Airline logo' />
                     }
-                   
-                </GridItem>
-
-                <GridItem>
+                   </GridItem>
+                   <GridItem>
                     { name === ''
-                    ? <Text> Unknown airline </Text>
+                    ? <Text ml='16px'> Unknown airline </Text>
                     : <Text ml='16px'> {airlineName} </Text>
                     }
                    
