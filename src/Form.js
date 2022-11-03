@@ -32,6 +32,7 @@ function Form(props) {
             .then(result => result.json())
             .then(data => where === 'from' ? setAutoHintsFrom(data) : setAutoHintsTo(data))
             .catch(err => console.error(err));
+            
     }
 
     return (
@@ -53,7 +54,7 @@ function Form(props) {
                         value={fromAirport}
                         onChange={(event) => {
                             setFromAirport(event.target.value)
-                            getData(fromAirport)
+                            getData(event.target.value)
                             setIsFormValid(false)
                             setIsFromAirportValid(false)
                         }}
@@ -111,7 +112,6 @@ function Form(props) {
                 <Button type='submit' color='#FFFFFF' h='64px' w='151px' bgColor='#7B61FF' borderRadius='8px' >Search</Button>
 
             </Flex>
-            {/* TODO: лимит  на подсказки, показывать первые 5 */}
             <Flex>
             <Box pb='80px' mr='55px' w='282px'>
                 {   fromAirport === '' 

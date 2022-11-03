@@ -16,7 +16,6 @@ import {
 
 function NonStopFlight(props) {
     const { name = 'Unknown', price, time, link } = props;
-    console.log(name)
     const airlineName = airlineCode.filter((el) => el.code === name)[0]?.name_translations.en
     return (
         <GridItem colStart={3} colEnd={-2}
