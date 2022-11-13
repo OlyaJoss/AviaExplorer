@@ -65,8 +65,33 @@ const FlightRes = ({ serverResponse, isFetchSend }) => {
             </GridItem>
 
             {/* Flight info */}
+            {/* TODO https://trello.com/c/soJ7ceOp/41-%D0%B4%D0%BE%D0%B1%D0%B0%D0%B2%D0%B8%D1%82%D1%8C-%D0%B2%D0%B5%D1%80%D1%81%D1%82%D0%BA%D1%83-%D0%B4%D0%BB%D1%8F-%D1%80%D0%B5%D0%B7%D1%83%D0%BB%D1%8C%D1%82%D0%B0%D1%82%D0%BE%D0%B2-%D1%81-%D0%BF%D0%B5%D1%80%D0%B5%D1%81%D0%B0%D0%B4%D0%BA%D0%B0%D0%BC%D0%B8 */}
+            {serverResponse.data.filter((el) => el.transfers === 0).map((el) => (<NonStopFlight
+                name={el.airline}
+                key={el.link}
+                price={el.price}
+                time={new Date(el.departure_at).toUTCString().slice(0, 22)}
+                link={el.link}
+            />))}
 
-            {serverResponse.data.map((el) => (<NonStopFlight
+            <GridItem 
+                colStart={2} colEnd={-3}>
+                <Text color='#474A51' pt={6} pr={0}> 1 stop </Text>
+            </GridItem>
+            {serverResponse.data.filter((el) => el.transfers === 1).map((el) => (<NonStopFlight
+                name={el.airline}
+                key={el.link}
+                price={el.price}
+                time={new Date(el.departure_at).toUTCString().slice(0, 22)}
+                link={el.link}
+            />))}
+
+            <GridItem 
+                colStart={2} colEnd={-3}>
+                <Text color='#474A51' pt={6} pr={0}> 2 stops </Text>
+            </GridItem> 
+
+            {serverResponse.data.filter((el) => el.transfers === 2).map((el) => (<NonStopFlight
                 name={el.airline}
                 key={el.link}
                 price={el.price}
