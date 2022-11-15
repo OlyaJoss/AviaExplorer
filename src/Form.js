@@ -86,7 +86,7 @@ function Form(props) {
                         value={toAirport}
                         onChange={(event) => {
                             setToAirport(event.target.value)
-                            getData(toAirport, 'to')
+                            getData(event.target.value, 'to')
                             setIsToAirportValid(false)
                         }}
                         placeholder='Airport, City or Country'
@@ -113,7 +113,10 @@ function Form(props) {
 
             </Flex>
             <Flex>
+                
             <Box pb='80px' mr='55px' w='282px'>
+            { !isFromAirportValid &&
+                <>
                 {   fromAirport === '' 
                 ?  <Text>Fill in this field</Text>
                 : isFromAirportValid
@@ -131,9 +134,14 @@ function Form(props) {
                         {name} {country_name} {code}
                     </Button>)
                 )}
+                </>
+            }
             </Box>
+                
 
             <Box pb='80px' w='282px'>
+            { !isToAirportValid &&
+                <>
                 { toAirport === ''
                 ? <Text>Fill in this field</Text>
                 :    isToAirportValid
@@ -151,6 +159,8 @@ function Form(props) {
                         {name} {country_name} {code}
                     </Button>)
                 )}
+                </>
+            }
             </Box>
             </Flex>
         </>
